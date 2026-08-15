@@ -86,6 +86,34 @@ describe("normalizeApps", () => {
     });
   });
 
+  it("uses the current Unicorn City deployment address", () => {
+    const [app] = normalizeApps([
+      repository({
+        name: "stockgame",
+        homepage: "https://unicity-vert.vercel.app",
+      }),
+    ]);
+
+    expect(app).toMatchObject({
+      name: "유니콘 시티",
+      homepage: "https://stockgame-alpha.vercel.app/",
+    });
+  });
+
+  it("uses the current Sports Manager deployment address", () => {
+    const [app] = normalizeApps([
+      repository({
+        name: "sportsmanager",
+        homepage: "https://spmg-ochre.vercel.app",
+      }),
+    ]);
+
+    expect(app).toMatchObject({
+      name: "스포츠매니저",
+      homepage: "https://sportsmanager.vercel.app/",
+    });
+  });
+
   it("removes personal names from curated catalog copy", () => {
     const apps = normalizeApps([
       repository({ name: "jianpython", description: null }),

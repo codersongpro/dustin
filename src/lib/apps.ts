@@ -19,7 +19,10 @@ export interface AppSummary {
 
 const DESCRIPTION_FALLBACK = "소개가 아직 등록되지 않았습니다";
 
-const CURATED_METADATA: Record<string, Pick<AppSummary, "name" | "description">> = {
+const CURATED_METADATA: Record<
+  string,
+  Pick<AppSummary, "name" | "description"> & Partial<Pick<AppSummary, "homepage">>
+> = {
   specialedu: {
     name: "한아름",
     description: "특별실 예약·결보강·학사일정을 한곳에서 관리하는 특수학교 업무 지원 앱",
@@ -55,10 +58,12 @@ const CURATED_METADATA: Record<string, Pick<AppSummary, "name" | "description">>
   sportsmanager: {
     name: "스포츠매니저",
     description: "감독이 되어 선수단과 전술을 운영하고 팀을 정상으로 이끄는 스포츠 게임",
+    homepage: "https://sportsmanager.vercel.app/",
   },
   stockgame: {
     name: "유니콘 시티",
     description: "회사를 경영하고 다양한 자산에 투자해 순자산을 키우는 경제 교육 게임",
+    homepage: "https://stockgame-alpha.vercel.app/",
   },
   vibecoderlab: {
     name: "VibeCoder Lab",
@@ -111,7 +116,7 @@ export function normalizeApps(repositories: GithubRepository[]): AppSummary[] {
         name: metadata?.name || repository.name,
         description:
           metadata?.description || repository.description || DESCRIPTION_FALLBACK,
-        homepage: repository.homepage as string,
+        homepage: metadata?.homepage || (repository.homepage as string),
         repositoryUrl: repository.html_url,
         updatedAt: repository.updated_at,
       };
