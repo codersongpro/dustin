@@ -69,6 +69,34 @@ describe("normalizeApps", () => {
     );
   });
 
+  it("uses curated public metadata while preserving the deployed address", () => {
+    const [app] = normalizeApps([
+      repository({
+        name: "specialedu",
+        description: null,
+        homepage: "https://spedu-xi.vercel.app",
+      }),
+    ]);
+
+    expect(app).toMatchObject({
+      name: "한아름",
+      description:
+        "특별실 예약·결보강·학사일정을 한곳에서 관리하는 특수학교 업무 지원 앱",
+      homepage: "https://spedu-xi.vercel.app",
+    });
+  });
+
+  it("removes personal names from curated catalog copy", () => {
+    const apps = normalizeApps([
+      repository({ name: "jianpython", description: null }),
+      repository({ name: "bookquiz", description: null }),
+    ]);
+
+    expect(apps.map(({ name, description }) => `${name} ${description}`).join(" ")).not.toMatch(
+      /지안|송동석/,
+    );
+  });
+
   it("sorts apps by the latest repository update", () => {
     const older = repository({ name: "older", updated_at: "2026-08-13T08:00:00Z" });
     const newer = repository({ name: "newer", updated_at: "2026-08-15T08:00:00Z" });
