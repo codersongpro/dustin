@@ -84,6 +84,18 @@ const CURATED_METADATA: Record<
     name: "소통픽",
     description: "충북 소통메신저에서 수신 대상을 빠르게 선택하도록 돕는 자동화 도구",
   },
+  vocamaster: {
+    name: "보카마스터",
+    description: "원하는 단어 목록으로 인쇄용 어휘 학습지를 자동으로 만들어주는 영단어 학습 도구",
+  },
+  edunote: {
+    name: "에듀노트",
+    description: "학생기록·교무 업무·수업자료 작성을 돕는 교사용 AI 어시스턴트",
+  },
+  travel: {
+    name: "여행 코스 플래너",
+    description: "예산과 테마를 고르면 식당·액티비티·숙소를 날짜별 동선으로 짜주는 여행 계획 웹앱",
+  },
 };
 
 export function isPublicWebUrl(value: string | null): value is string {
