@@ -30,16 +30,13 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
   return (
     <section aria-label="배포된 앱" className="app-grid">
       {apps.map((app) => (
-        <article className="app-card" key={app.repositoryUrl}>
+        <article className="app-card" key={app.homepage}>
           <h2>{app.name}</h2>
           <p className="app-description">{app.description}</p>
           <p className="app-host">{new URL(app.homepage).host}</p>
           <div className="app-links">
             <a className="primary-link" href={app.homepage} {...externalLinkProps}>
               앱 열기
-            </a>
-            <a className="secondary-link" href={app.repositoryUrl} {...externalLinkProps}>
-              GitHub
             </a>
           </div>
         </article>

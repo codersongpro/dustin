@@ -150,7 +150,7 @@ a {
 }
 
 .primary-link {
-  flex: 1;
+  width: 100%;
   padding: 0 18px;
   color: #ffffff;
   background: var(--accent);
@@ -158,17 +158,6 @@ a {
 
 .primary-link:hover {
   background: var(--accent-dark);
-}
-
-.secondary-link {
-  padding: 0 16px;
-  border: 1px solid var(--line);
-  background: var(--surface-solid);
-}
-
-.secondary-link:hover {
-  border-color: rgba(54, 89, 227, 0.35);
-  color: var(--accent);
 }
 
 .app-links a:focus-visible {

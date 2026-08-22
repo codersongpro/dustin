@@ -8,7 +8,6 @@ const app: AppSummary = {
   name: "classroom-tools",
   description: "수업에 바로 쓰는 도구 모음",
   homepage: "https://classroom-tools.vercel.app/path",
-  repositoryUrl: "https://github.com/codersongpro/classroom-tools",
   updatedAt: "2026-08-15T08:00:00Z",
 };
 
@@ -28,11 +27,7 @@ describe("AppGrid", () => {
     expect(appLink).toHaveAttribute("rel", expect.stringContaining("noopener"));
     expect(appLink).toHaveAttribute("rel", expect.stringContaining("noreferrer"));
 
-    const repositoryLink = screen.getByRole("link", { name: "GitHub" });
-    expect(repositoryLink).toHaveAttribute("href", app.repositoryUrl);
-    expect(repositoryLink).toHaveAttribute("target", "_blank");
-    expect(repositoryLink).toHaveAttribute("rel", expect.stringContaining("noopener"));
-    expect(repositoryLink).toHaveAttribute("rel", expect.stringContaining("noreferrer"));
+    expect(screen.queryByRole("link", { name: "GitHub" })).not.toBeInTheDocument();
   });
 
   it("explains how to register an app when the list is empty", () => {

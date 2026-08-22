@@ -41,13 +41,12 @@ describe("normalizeApps", () => {
         name: "new-app",
         description: "A newly updated app",
         homepage: "https://new-app.vercel.app",
-        repositoryUrl: "https://github.com/codersongpro/new-app",
         updatedAt: "2026-08-15T08:00:00Z",
       },
     ]);
 
     expect(JSON.stringify(normalizeApps([input]))).not.toMatch(
-      /email|avatar|location|owner|private/i,
+      /email|avatar|location|owner|private|github\.com/i,
     );
   });
 

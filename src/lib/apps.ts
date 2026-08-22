@@ -13,7 +13,6 @@ export interface AppSummary {
   name: string;
   description: string;
   homepage: string;
-  repositoryUrl: string;
   updatedAt: string;
 }
 
@@ -117,7 +116,6 @@ export function normalizeApps(repositories: GithubRepository[]): AppSummary[] {
         description:
           metadata?.description || repository.description || DESCRIPTION_FALLBACK,
         homepage: metadata?.homepage || (repository.homepage as string),
-        repositoryUrl: repository.html_url,
         updatedAt: repository.updated_at,
       };
     })
