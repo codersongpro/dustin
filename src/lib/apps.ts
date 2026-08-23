@@ -84,6 +84,10 @@ const CURATED_METADATA: Record<
     name: "소통픽",
     description: "충북 소통메신저에서 수신 대상을 빠르게 선택하도록 돕는 자동화 도구",
   },
+  youquiz: {
+    name: "유퀴즈",
+    description: "유튜브 공개 영상을 영어 학습용 퀴즈로 바꿔주는 가족용 학습 웹앱",
+  },
   vocamaster: {
     name: "보카마스터",
     description: "원하는 단어 목록으로 인쇄용 어휘 학습지를 자동으로 만들어주는 영단어 학습 도구",
