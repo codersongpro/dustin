@@ -36,7 +36,7 @@ const CURATED_METADATA: Record<
   },
   neonescape: {
     name: "NEON ESCAPE",
-    description: "미래 연구시설의 스테이지와 보스를 돌파하는 2D 로그라이트 게임",
+    description: "미래 연구시설의 스테이지와 보스를 돌파하는 2D 로그라이크 게임",
   },
   calender: {
     name: "월별 행사계획",
@@ -44,7 +44,7 @@ const CURATED_METADATA: Record<
   },
   ss: {
     name: "티처 메이커",
-    description: "신규 교사의 30일 학교생활을 선택과 성장으로 풀어낸 교직 로그라이트 게임",
+    description: "신규 교사의 30일 학교생활을 선택과 성장으로 풀어낸 교직 로그라이크 게임",
   },
   touchgame: {
     name: "TouchGame",
