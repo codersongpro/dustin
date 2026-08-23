@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { getApps, normalizeApps, type GithubRepository } from "@/lib/apps";
+import { formatUpdatedAt, getApps, normalizeApps, type GithubRepository } from "@/lib/apps";
 
 const baseRepository: GithubRepository = {
   name: "sample-app",
@@ -132,6 +132,12 @@ describe("normalizeApps", () => {
       "newer",
       "older",
     ]);
+  });
+});
+
+describe("formatUpdatedAt", () => {
+  it("formats an ISO timestamp as a dotted date", () => {
+    expect(formatUpdatedAt("2026-08-15T08:00:00Z")).toBe("2026.08.15");
   });
 });
 

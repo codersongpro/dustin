@@ -20,6 +20,7 @@ describe("AppGrid", () => {
     expect(screen.getByRole("heading", { name: "classroom-tools" })).toBeInTheDocument();
     expect(screen.getByText("수업에 바로 쓰는 도구 모음")).toBeInTheDocument();
     expect(screen.getByText("classroom-tools.vercel.app")).toBeInTheDocument();
+    expect(screen.getByText("2026.08.15")).toBeInTheDocument();
 
     const appLink = screen.getByRole("link", { name: "앱 열기" });
     expect(appLink).toHaveAttribute("href", app.homepage);

@@ -102,6 +102,10 @@ const CURATED_METADATA: Record<
   },
 };
 
+export function formatUpdatedAt(updatedAt: string): string {
+  return updatedAt.slice(0, 10).replaceAll("-", ".");
+}
+
 export function isPublicWebUrl(value: string | null): value is string {
   if (!value) {
     return false;

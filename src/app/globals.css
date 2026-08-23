@@ -152,15 +152,28 @@ a {
   -webkit-line-clamp: 2;
 }
 
-.app-host {
-  margin: auto 0 0;
+.app-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
   padding-top: 28px;
-  overflow: hidden;
-  color: color-mix(in srgb, var(--card-accent, var(--accent)) 55%, var(--muted));
   font-family: var(--font-space-mono), "SFMono-Regular", Consolas, monospace;
   font-size: 0.75rem;
+}
+
+.app-host {
+  min-width: 0;
+  overflow: hidden;
+  color: color-mix(in srgb, var(--card-accent, var(--accent)) 55%, var(--muted));
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.app-updated {
+  flex-shrink: 0;
+  color: var(--muted);
 }
 
 .app-links {
