@@ -59,6 +59,7 @@ describe("normalizeApps", () => {
     ["file URL", { homepage: "file:///tmp/app" }],
     ["malformed URL", { homepage: "not a url" }],
     ["catalog itself", { name: "dustin" }],
+    ["repository kept off the catalog", { name: "jiggu" }],
   ])("excludes a %s", (_label, overrides) => {
     expect(normalizeApps([repository(overrides)])).toEqual([]);
   });
@@ -108,11 +109,10 @@ describe("normalizeApps", () => {
         "vocamaster",
         "edunote",
         "travel",
-        "jiggu",
       ].map((name) => repository({ name, description: null })),
     );
 
-    expect(apps).toHaveLength(20);
+    expect(apps).toHaveLength(19);
 
     for (const app of apps) {
       expect(app.name).not.toMatch(/^[a-z0-9-]+$/);

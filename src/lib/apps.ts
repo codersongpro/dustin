@@ -18,7 +18,7 @@ export interface AppSummary {
 
 const DESCRIPTION_FALLBACK = "소개가 아직 등록되지 않았습니다";
 
-const EXCLUDED_REPOSITORIES = new Set(["dustin"]);
+const EXCLUDED_REPOSITORIES = new Set(["dustin", "jiggu"]);
 
 const CURATED_METADATA: Record<
   string,
@@ -101,10 +101,6 @@ const CURATED_METADATA: Record<
   travel: {
     name: "여행 코스 플래너",
     description: "예산과 테마를 고르면 식당·액티비티·숙소를 날짜별 동선으로 짜 주는 여행 계획 앱",
-  },
-  jiggu: {
-    name: "핫딜 레이더",
-    description: "해외 브랜드몰 세일을 훑어 관세·배송비까지 더한 원가를 계산해 주는 소싱 도구",
   },
 };
 
