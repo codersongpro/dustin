@@ -58,6 +58,7 @@ describe("normalizeApps", () => {
     ["JavaScript URL", { homepage: "javascript:alert(1)" }],
     ["file URL", { homepage: "file:///tmp/app" }],
     ["malformed URL", { homepage: "not a url" }],
+    ["catalog itself", { name: "dustin" }],
   ])("excludes a %s", (_label, overrides) => {
     expect(normalizeApps([repository(overrides)])).toEqual([]);
   });
@@ -80,9 +81,56 @@ describe("normalizeApps", () => {
     expect(app).toMatchObject({
       name: "한아름",
       description:
-        "특별실 예약·결보강·학사일정을 한곳에서 관리하는 특수학교 업무 지원 앱",
+        "특별실 예약·결보강·학사일정에 IEP·수업자료까지 담은 특수교사 업무 지원 앱",
       homepage: "https://spedu-xi.vercel.app",
     });
+  });
+
+  it("gives every catalog entry a curated name and a one-sentence description", () => {
+    const apps = normalizeApps(
+      [
+        "specialedu",
+        "cbgeg",
+        "trade",
+        "neonescape",
+        "calender",
+        "ss",
+        "touchgame",
+        "simcity",
+        "sportsmanager",
+        "stockgame",
+        "vibecoderlab",
+        "jianpython",
+        "bookquiz",
+        "jianpython2",
+        "sotong",
+        "youquiz",
+        "vocamaster",
+        "edunote",
+        "travel",
+        "jiggu",
+      ].map((name) => repository({ name, description: null })),
+    );
+
+    expect(apps).toHaveLength(20);
+
+    for (const app of apps) {
+      expect(app.name).not.toMatch(/^[a-z0-9-]+$/);
+      expect(app.description).not.toBe("소개가 아직 등록되지 않았습니다");
+      expect(app.description.length).toBeLessThanOrEqual(45);
+      expect(app.description).not.toMatch(/[.]$/);
+    }
+  });
+
+  it("keeps the roguelike genre spelled 로그라이크", () => {
+    const apps = normalizeApps([
+      repository({ name: "neonescape", description: null }),
+      repository({ name: "ss", description: null }),
+    ]);
+
+    const copy = apps.map((app) => app.description).join(" ");
+    expect(copy).toContain("로그라이크");
+    expect(copy).not.toContain("로그라이트");
   });
 
   it("uses the current Unicorn City deployment address", () => {
