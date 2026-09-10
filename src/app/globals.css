@@ -34,6 +34,9 @@
 
   --radius-10: 10px;
   --radius-12: 12px;
+  --radius-full: 9999px;
+
+  --fill-normal: rgba(112, 115, 124, 0.08);
 
   --shadow-card: 0 1px 4px rgba(23, 23, 23, 0.07), 0 0 1px rgba(23, 23, 23, 0.06);
   --shadow-strong: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -127,6 +130,42 @@ a:active {
   line-height: 1.6;
 }
 
+.hero-intro {
+  margin: 12px 0 0;
+  color: var(--label-alternative);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--label-normal);
+}
+
+.section-title svg {
+  color: var(--primary-normal);
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--label-alternative);
+}
+
 .app-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -147,6 +186,20 @@ a:active {
   transition:
     transform var(--duration-normal) var(--ease-out),
     box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.app-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--fill-normal);
+  color: var(--label-alternative);
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .app-card h2 {
@@ -205,6 +258,7 @@ a:active {
   min-height: 44px;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   border-radius: var(--radius-10);
   font-family: var(--font-sans);
   font-size: 0.9rem;
@@ -234,6 +288,37 @@ a:active {
   background: var(--background-normal-normal);
   box-shadow: var(--shadow-card);
   line-height: 1.7;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-normal-normal);
+  color: var(--label-alternative);
+  font-size: 0.85rem;
+}
+
+.footer-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.footer-link {
+  color: var(--primary-normal);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  color: var(--primary-strong);
+  text-decoration: underline;
 }
 
 @media (min-width: 640px) {
