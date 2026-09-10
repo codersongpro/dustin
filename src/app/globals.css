@@ -290,37 +290,6 @@ a:active {
   line-height: 1.7;
 }
 
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line-normal-normal);
-  color: var(--label-alternative);
-  font-size: 0.85rem;
-}
-
-.footer-note {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-}
-
-.footer-link {
-  color: var(--primary-normal);
-  font-family: var(--font-mono);
-  font-weight: 600;
-}
-
-.footer-link:hover {
-  color: var(--primary-strong);
-  text-decoration: underline;
-}
-
 @media (min-width: 640px) {
   .site-shell {
     width: min(100% - 56px, 1160px);
