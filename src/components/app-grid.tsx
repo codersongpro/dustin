@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 import { formatUpdatedAt, type AppSummary } from "@/lib/apps";
 
 interface AppGridProps {
@@ -11,8 +9,6 @@ const externalLinkProps = {
   target: "_blank",
   rel: "noopener noreferrer",
 } as const;
-
-const ACCENT_PALETTE = ["#00e5ff", "#ff2d95", "#8c78ff", "#00ffa3", "#ffb020"];
 
 export function AppGrid({ apps, hasError }: AppGridProps) {
   if (hasError) {
@@ -33,12 +29,8 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
 
   return (
     <section aria-label="배포된 앱" className="app-grid">
-      {apps.map((app, index) => (
-        <article
-          className="app-card"
-          key={app.homepage}
-          style={{ "--card-accent": ACCENT_PALETTE[index % ACCENT_PALETTE.length] } as CSSProperties}
-        >
+      {apps.map((app) => (
+        <article className="app-card" key={app.homepage}>
           <h2>{app.name}</h2>
           <p className="app-description">{app.description}</p>
           <div className="app-meta">

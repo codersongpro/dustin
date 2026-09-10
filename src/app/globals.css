@@ -1,55 +1,88 @@
-:root {
-  --background: #08080d;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-solid: #111017;
-  --text: #f2f3f7;
-  --muted: #9a9fb2;
-  --line: rgba(255, 255, 255, 0.12);
-  --accent: #00e5ff;
-  --accent-dark: #00b8cc;
-  --focus: #ffb020;
-  --radius-lg: 4px;
-  --radius-md: 4px;
-  --shadow: 0 20px 60px rgba(0, 229, 255, 0.08);
+/* Wanted Design System restyle.
+   Token values below are copied verbatim from the Wanted Design System's
+   tokens/fig-tokens.css, tokens/fonts.css and tokens/base.css (light theme). */
+
+@font-face {
+  font-family: "Pretendard JP";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariableJP.woff2")
+    format("woff2-variations");
 }
 
-* {
+@font-face {
+  font-family: "Wanted Sans Variable";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/complete/WantedSansVariable.woff2")
+    format("woff2-variations");
+}
+
+:root {
+  color-scheme: light;
+
+  --primary-normal: rgb(51, 102, 255);
+  --primary-strong: rgb(0, 94, 235);
+  --primary-heavy: rgb(0, 84, 209);
+  --label-normal: rgb(23, 23, 23);
+  --label-alternative: rgba(55, 56, 60, 0.61);
+  --background-normal-normal: rgb(255, 255, 255);
+  --line-normal-normal: rgba(112, 115, 124, 0.22);
+  --static-white: rgb(255, 255, 255);
+
+  --radius-10: 10px;
+  --radius-12: 12px;
+
+  --shadow-card: 0 1px 4px rgba(23, 23, 23, 0.07), 0 0 1px rgba(23, 23, 23, 0.06);
+  --shadow-strong: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --font-sans:
+    "Pretendard JP", "Pretendard Variable JP", "Pretendard Variable", Pretendard, system-ui,
+    -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Wanted Sans Variable", "Wanted Sans", var(--font-sans);
+  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   min-width: 320px;
-  background: var(--background);
+  -webkit-text-size-adjust: 100%;
+  background: var(--background-normal-normal);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse 900px 500px at 12% -8%, rgba(255, 45, 149, 0.14), transparent 60%),
-    radial-gradient(ellipse 900px 600px at 92% 6%, rgba(0, 229, 255, 0.12), transparent 60%),
-    var(--background);
-  background-attachment: fixed;
-  font-family:
-    var(--font-noto-sans-kr), -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic",
-    sans-serif;
+  color: var(--label-normal);
+  background: var(--background-normal-normal);
+  font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 56px 56px;
+a {
+  color: var(--primary-normal);
+  text-decoration: none;
 }
 
-a {
-  color: inherit;
+a:hover {
+  color: var(--primary-strong);
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--primary-heavy);
 }
 
 .site-shell {
@@ -60,16 +93,16 @@ a {
 
 .hero {
   max-width: 760px;
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
 
 .eyebrow {
-  margin: 0 0 14px;
-  color: var(--accent);
-  font-family: var(--font-space-mono), "SFMono-Regular", Consolas, monospace;
-  font-size: 0.75rem;
+  margin: 0 0 12px;
+  color: var(--primary-normal);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -79,75 +112,61 @@ a {
 
 .hero h1 {
   margin: 0;
-  font-family: var(--font-orbitron), var(--font-noto-sans-kr), sans-serif;
-  font-size: clamp(2.6rem, 8vw, 5.25rem);
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
   letter-spacing: -0.01em;
-  line-height: 0.98;
-  color: #ffffff;
-  text-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+  line-height: 1.05;
+  color: var(--label-normal);
 }
 
 .hero-copy {
-  margin: 24px 0 0;
-  color: var(--muted);
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-  line-height: 1.65;
+  margin: 20px 0 0;
+  color: var(--label-alternative);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
 }
 
 .app-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
+  gap: 16px;
 }
 
 .app-card {
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 276px;
+  min-height: 260px;
   flex-direction: column;
-  padding: 28px;
-  border: 1px solid color-mix(in srgb, var(--card-accent, var(--accent)) 35%, var(--line));
-  border-radius: var(--radius-lg);
-  background: linear-gradient(
-    160deg,
-    color-mix(in srgb, var(--card-accent, var(--accent)) 9%, transparent),
-    var(--surface)
-  );
-  box-shadow: 0 20px 60px color-mix(in srgb, var(--card-accent, var(--accent)) 10%, transparent);
+  padding: 24px;
+  border: 1px solid var(--line-normal-normal);
+  border-radius: var(--radius-12);
+  background: var(--background-normal-normal);
+  box-shadow: var(--shadow-card);
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
-}
-
-.app-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 2px;
-  background: var(--card-accent, var(--accent));
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .app-card h2 {
   margin: 0;
   overflow-wrap: anywhere;
-  font-family: var(--font-orbitron), var(--font-noto-sans-kr), sans-serif;
-  font-size: 1.2rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.3;
-  color: #ffffff;
+  line-height: 1.35;
+  color: var(--label-normal);
 }
 
 .app-description {
   display: -webkit-box;
-  margin: 16px 0 0;
+  margin: 12px 0 0;
   overflow: hidden;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.65;
+  color: var(--label-alternative);
+  font-size: 0.9rem;
+  line-height: 1.6;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
@@ -158,78 +177,69 @@ a {
   justify-content: space-between;
   gap: 12px;
   margin-top: auto;
-  padding-top: 28px;
-  font-family: var(--font-space-mono), "SFMono-Regular", Consolas, monospace;
-  font-size: 0.75rem;
+  padding-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
 }
 
 .app-host {
   min-width: 0;
   overflow: hidden;
-  color: color-mix(in srgb, var(--card-accent, var(--accent)) 55%, var(--muted));
+  color: var(--primary-normal);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .app-updated {
   flex-shrink: 0;
-  color: var(--muted);
+  color: var(--label-alternative);
 }
 
 .app-links {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.app-links a {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  font-family: var(--font-space-mono), "SFMono-Regular", Consolas, monospace;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  transition:
-    filter 160ms ease,
-    box-shadow 160ms ease;
+  margin-top: 14px;
 }
 
 .primary-link {
+  display: inline-flex;
   width: 100%;
-  padding: 0 18px;
-  color: #08080d;
-  background: var(--card-accent, var(--accent));
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-10);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--static-white);
+  background: var(--primary-normal);
+  transition: background var(--duration-fast) var(--ease-standard);
 }
 
 .primary-link:hover {
-  filter: brightness(1.12);
+  background: var(--primary-strong);
+  text-decoration: none;
 }
 
 .app-links a:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--primary-normal);
   outline-offset: 3px;
 }
 
 .status-message {
   margin: 0;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  color: var(--muted);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  padding: 24px;
+  border: 1px solid var(--line-normal-normal);
+  border-radius: var(--radius-12);
+  color: var(--label-alternative);
+  background: var(--background-normal-normal);
+  box-shadow: var(--shadow-card);
   line-height: 1.7;
 }
 
 @media (min-width: 640px) {
   .site-shell {
     width: min(100% - 56px, 1160px);
-    padding-top: 104px;
+    padding-top: 96px;
   }
 
   .app-grid {
@@ -238,22 +248,16 @@ a {
 }
 
 @media (min-width: 960px) {
-  .hero {
-    margin-bottom: 64px;
-  }
-
   .app-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
+    gap: 20px;
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .app-card:hover {
-    border-color: var(--card-accent, var(--accent));
-    box-shadow: 0 28px 72px
-      color-mix(in srgb, var(--card-accent, var(--accent)) 22%, transparent);
-    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong);
+    transform: translateY(-3px);
   }
 }
 
