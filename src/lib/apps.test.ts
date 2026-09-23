@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { formatUpdatedAt, getApps, normalizeApps, type GithubRepository } from "@/lib/apps";
+import { formatDate, getApps, normalizeApps, type GithubRepository } from "@/lib/apps";
 
 const baseRepository: GithubRepository = {
   name: "sample-app",
@@ -8,6 +8,7 @@ const baseRepository: GithubRepository = {
   homepage: "https://sample-app.vercel.app",
   html_url: "https://github.com/codersongpro/sample-app",
   updated_at: "2026-08-14T08:00:00Z",
+  created_at: "2026-01-10T08:00:00Z",
   private: false,
   archived: false,
   fork: false,
@@ -30,6 +31,7 @@ describe("normalizeApps", () => {
         homepage: "https://new-app.vercel.app",
         html_url: "https://github.com/codersongpro/new-app",
         updated_at: "2026-08-15T08:00:00Z",
+        created_at: "2026-01-20T08:00:00Z",
       }),
       owner: { login: "codersongpro", avatar_url: "https://example.com/avatar.png" },
       email: "private@example.com",
@@ -42,6 +44,7 @@ describe("normalizeApps", () => {
         description: "A newly updated app",
         homepage: "https://new-app.vercel.app",
         updatedAt: "2026-08-15T08:00:00Z",
+        createdAt: "2026-01-20T08:00:00Z",
       },
     ]);
 
@@ -135,9 +138,9 @@ describe("normalizeApps", () => {
   });
 });
 
-describe("formatUpdatedAt", () => {
+describe("formatDate", () => {
   it("formats an ISO timestamp as a dotted date", () => {
-    expect(formatUpdatedAt("2026-08-15T08:00:00Z")).toBe("2026.08.15");
+    expect(formatDate("2026-08-15T08:00:00Z")).toBe("2026.08.15");
   });
 });
 

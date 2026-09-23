@@ -9,6 +9,7 @@ const app: AppSummary = {
   description: "수업에 바로 쓰는 도구 모음",
   homepage: "https://classroom-tools.vercel.app/path",
   updatedAt: "2026-08-15T08:00:00Z",
+  createdAt: "2026-01-05T08:00:00Z",
 };
 
 afterEach(cleanup);
@@ -20,7 +21,8 @@ describe("AppGrid", () => {
     expect(screen.getByRole("heading", { name: "classroom-tools" })).toBeInTheDocument();
     expect(screen.getByText("수업에 바로 쓰는 도구 모음")).toBeInTheDocument();
     expect(screen.getByText("classroom-tools.vercel.app")).toBeInTheDocument();
-    expect(screen.getByText("2026.08.15")).toBeInTheDocument();
+    expect(screen.getByText("개발 2026.01.05")).toBeInTheDocument();
+    expect(screen.getByText("업데이트 2026.08.15")).toBeInTheDocument();
 
     const appLink = screen.getByRole("link", { name: "앱 열기" });
     expect(appLink).toHaveAttribute("href", app.homepage);

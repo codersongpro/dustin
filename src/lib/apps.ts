@@ -4,6 +4,7 @@ export interface GithubRepository {
   homepage: string | null;
   html_url: string;
   updated_at: string;
+  created_at: string;
   private: boolean;
   archived: boolean;
   fork: boolean;
@@ -14,6 +15,7 @@ export interface AppSummary {
   description: string;
   homepage: string;
   updatedAt: string;
+  createdAt: string;
 }
 
 const DESCRIPTION_FALLBACK = "소개가 아직 등록되지 않았습니다";
@@ -100,9 +102,25 @@ const CURATED_METADATA: Record<
     name: "여행 코스 플래너",
     description: "예산과 테마를 고르면 식당·액티비티·숙소를 날짜별 동선으로 짜주는 여행 계획 웹앱",
   },
+  mvedit: {
+    name: "CutCap",
+    description: "설치·로그인 없이 브라우저에서 영상을 자르고 이어 붙여 원하는 용량·화면비로 내보내는 영상 편집기",
+    homepage: "https://cutcap.vercel.app",
+  },
+  susin: {
+    name: "신통픽",
+    description:
+      "에듀파인 수신그룹 등록과 소통메신저 수신자 선택을 한 번에 처리하는 충북 교사용 자동화 프로그램",
+    homepage: "https://stpick.vercel.app",
+  },
+  jiggu: {
+    name: "핫딜 레이더",
+    description: "해외 쇼핑몰 세일 상품을 실시간으로 스캔해 원가와 관세까지 계산해주는 가족용 해외 소싱 도우미",
+    homepage: "https://ziggu.vercel.app",
+  },
 };
 
-export function formatUpdatedAt(updatedAt: string): string {
+export function formatDate(updatedAt: string): string {
   return updatedAt.slice(0, 10).replaceAll("-", ".");
 }
 
@@ -137,6 +155,7 @@ export function normalizeApps(repositories: GithubRepository[]): AppSummary[] {
           metadata?.description || repository.description || DESCRIPTION_FALLBACK,
         homepage: metadata?.homepage || (repository.homepage as string),
         updatedAt: repository.updated_at,
+        createdAt: repository.created_at,
       };
     })
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
