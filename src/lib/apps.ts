@@ -27,6 +27,7 @@ const CURATED_METADATA: Record<
   specialedu: {
     name: "한아름",
     description: "특별실 예약·결보강·학사일정을 한곳에서 관리하는 특수학교 업무 지원 앱",
+    homepage: "https://hanarum.vercel.app/",
   },
   cbgeg: {
     name: "충북 GEG",
