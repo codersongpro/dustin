@@ -21,6 +21,7 @@ describe("Dustin Apps page", () => {
               homepage: "https://lesson-kit.vercel.app",
               html_url: "https://github.com/codersongpro/lesson-kit",
               updated_at: "2026-08-15T08:00:00Z",
+              created_at: "2026-01-05T08:00:00Z",
               private: false,
               archived: false,
               fork: false,

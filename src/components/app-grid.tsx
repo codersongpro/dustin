@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import { formatUpdatedAt, type AppSummary } from "@/lib/apps";
+import { formatDate, type AppSummary } from "@/lib/apps";
 
 interface AppGridProps {
   apps: AppSummary[];
@@ -43,9 +43,14 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
           <p className="app-description">{app.description}</p>
           <div className="app-meta">
             <span className="app-host">{new URL(app.homepage).host}</span>
-            <time className="app-updated" dateTime={app.updatedAt}>
-              {formatUpdatedAt(app.updatedAt)}
-            </time>
+            <div className="app-dates">
+              <time className="app-created" dateTime={app.createdAt} title="최초 개발일">
+                개발 {formatDate(app.createdAt)}
+              </time>
+              <time className="app-updated" dateTime={app.updatedAt} title="최근 업데이트일">
+                업데이트 {formatDate(app.updatedAt)}
+              </time>
+            </div>
           </div>
           <div className="app-links">
             <a className="primary-link" href={app.homepage} {...externalLinkProps}>
