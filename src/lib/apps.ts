@@ -13,7 +13,8 @@ export interface GithubRepository {
 export interface AppSummary {
   name: string;
   description: string;
-  homepage: string;
+  homepage: string | null;
+  downloadUrl: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -22,7 +23,8 @@ const DESCRIPTION_FALLBACK = "소개가 아직 등록되지 않았습니다";
 
 const CURATED_METADATA: Record<
   string,
-  Pick<AppSummary, "name" | "description"> & Partial<Pick<AppSummary, "homepage">>
+  Pick<AppSummary, "name" | "description"> &
+    Partial<Pick<AppSummary, "homepage" | "downloadUrl">>
 > = {
   specialedu: {
     name: "한아름",
@@ -118,6 +120,19 @@ const CURATED_METADATA: Record<
     description: "해외 쇼핑몰 세일 상품을 실시간으로 스캔해 원가와 관세까지 계산해주는 가족용 해외 소싱 도우미",
     homepage: "https://ziggu.vercel.app",
   },
+  minisr: {
+    name: "Mini SR Test",
+    description: "SR 수준에 맞춰 어휘·문법·독해 문제를 만들어주는 초등 영어 읽기 평가 도구 (온라인·인쇄용)",
+  },
+  mathgame: {
+    name: "Bubble Semble",
+    description: "거품을 쏘아 포획하고 수학 문제를 함께 푸는 최대 10인 실시간 협동 수학 게임",
+  },
+  ytdown: {
+    name: "ytdown",
+    description: "유튜브 주소를 넣으면 MP4 영상 또는 MP3 음원으로 저장하는 Windows·macOS 데스크톱 프로그램",
+    downloadUrl: "https://github.com/codersongpro/ytdown/releases/latest",
+  },
 };
 
 export function formatDate(updatedAt: string): string {
@@ -144,7 +159,8 @@ export function normalizeApps(repositories: GithubRepository[]): AppSummary[] {
         !repository.private &&
         !repository.archived &&
         !repository.fork &&
-        isPublicWebUrl(repository.homepage),
+        (isPublicWebUrl(repository.homepage) ||
+          isPublicWebUrl(CURATED_METADATA[repository.name]?.downloadUrl ?? null)),
     )
     .map((repository) => {
       const metadata = CURATED_METADATA[repository.name];
@@ -153,7 +169,8 @@ export function normalizeApps(repositories: GithubRepository[]): AppSummary[] {
         name: metadata?.name || repository.name,
         description:
           metadata?.description || repository.description || DESCRIPTION_FALLBACK,
-        homepage: metadata?.homepage || (repository.homepage as string),
+        homepage: metadata?.homepage || repository.homepage || null,
+        downloadUrl: metadata?.downloadUrl ?? null,
         updatedAt: repository.updated_at,
         createdAt: repository.created_at,
       };

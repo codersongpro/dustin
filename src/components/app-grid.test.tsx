@@ -8,6 +8,7 @@ const app: AppSummary = {
   name: "classroom-tools",
   description: "수업에 바로 쓰는 도구 모음",
   homepage: "https://classroom-tools.vercel.app/path",
+  downloadUrl: null,
   updatedAt: "2026-08-15T08:00:00Z",
   createdAt: "2026-01-05T08:00:00Z",
 };
@@ -31,6 +32,22 @@ describe("AppGrid", () => {
     expect(appLink).toHaveAttribute("rel", expect.stringContaining("noreferrer"));
 
     expect(screen.queryByRole("link", { name: "GitHub" })).not.toBeInTheDocument();
+  });
+
+  it("renders a release download link for apps without a web address", () => {
+    const desktop: AppSummary = {
+      ...app,
+      name: "desktop-tool",
+      homepage: null,
+      downloadUrl: "https://github.com/codersongpro/desktop-tool/releases/latest",
+    };
+    render(<AppGrid apps={[desktop]} hasError={false} />);
+
+    const link = screen.getByRole("link", { name: "다운로드" });
+    expect(link).toHaveAttribute("href", desktop.downloadUrl);
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));
+    expect(screen.queryByRole("link", { name: "앱 열기" })).not.toBeInTheDocument();
   });
 
   it("explains how to register an app when the list is empty", () => {

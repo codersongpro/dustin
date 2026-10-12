@@ -43,6 +43,7 @@ describe("normalizeApps", () => {
         name: "new-app",
         description: "A newly updated app",
         homepage: "https://new-app.vercel.app",
+        downloadUrl: null,
         updatedAt: "2026-08-15T08:00:00Z",
         createdAt: "2026-01-20T08:00:00Z",
       },
@@ -86,6 +87,20 @@ describe("normalizeApps", () => {
         "특별실 예약·결보강·학사일정을 한곳에서 관리하는 특수학교 업무 지원 앱",
       homepage: "https://spedu-xi.vercel.app",
     });
+  });
+
+  it("lists a curated desktop app by its GitHub release link even without a homepage", () => {
+    const [app] = normalizeApps([repository({ name: "ytdown", homepage: null })]);
+
+    expect(app).toMatchObject({
+      name: "ytdown",
+      homepage: null,
+      downloadUrl: "https://github.com/codersongpro/ytdown/releases/latest",
+    });
+  });
+
+  it("keeps excluding a curated desktop app when its repository is private", () => {
+    expect(normalizeApps([repository({ name: "ytdown", homepage: null, private: true })])).toEqual([]);
   });
 
   it("uses the current Unicorn City deployment address", () => {

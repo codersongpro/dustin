@@ -36,6 +36,9 @@ const CATEGORY_BY_NAME: Record<string, string> = {
   CutCap: "생활 도구",
   신통픽: "업무 자동화",
   "핫딜 레이더": "생활 도구",
+  "Mini SR Test": "학습 도구",
+  "Bubble Semble": "교육 게임",
+  ytdown: "데스크톱 앱",
 };
 const DEFAULT_CATEGORY = "웹 앱";
 
@@ -67,7 +70,7 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
       </div>
       <section aria-label="배포된 앱" className="app-grid">
         {apps.map((app) => (
-          <article className="app-card" key={app.homepage}>
+          <article className="app-card" key={app.homepage ?? app.downloadUrl}>
             <span className="app-badge">
               <Icon name="tag" size={12} aria-hidden="true" />
               {CATEGORY_BY_NAME[app.name] ?? DEFAULT_CATEGORY}
@@ -75,7 +78,9 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
             <h2>{app.name}</h2>
             <p className="app-description">{app.description}</p>
             <div className="app-meta">
-              <span className="app-host">{new URL(app.homepage).host}</span>
+              <span className="app-host">
+                {app.homepage ? new URL(app.homepage).host : "GitHub 릴리즈"}
+              </span>
               <div className="app-dates">
                 <time className="app-created" dateTime={app.createdAt} title="최초 개발일">
                   개발 {formatDate(app.createdAt)}
@@ -86,10 +91,18 @@ export function AppGrid({ apps, hasError }: AppGridProps) {
               </div>
             </div>
             <div className="app-links">
-              <a className="primary-link" href={app.homepage} {...externalLinkProps}>
-                앱 열기
-                <Icon name="externalLink" size={16} aria-hidden="true" />
-              </a>
+              {app.homepage && (
+                <a className="primary-link" href={app.homepage} {...externalLinkProps}>
+                  앱 열기
+                  <Icon name="externalLink" size={16} aria-hidden="true" />
+                </a>
+              )}
+              {app.downloadUrl && (
+                <a className="primary-link" href={app.downloadUrl} {...externalLinkProps}>
+                  다운로드
+                  <Icon name="externalLink" size={16} aria-hidden="true" />
+                </a>
+              )}
             </div>
           </article>
         ))}
