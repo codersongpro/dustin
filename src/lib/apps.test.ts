@@ -163,7 +163,7 @@ describe("mergeExternalApps", () => {
     const merged = mergeExternalApps([old]);
 
     expect(merged.at(-1)).toEqual(old);
-    expect(merged.map((app) => app.name)).toContain("AI 토론");
+    expect(merged.map((app) => app.name)).toContain("AI 토론 배틀");
   });
 });
 

@@ -124,8 +124,9 @@ const CURATED_METADATA: Record<
 // GitHub 목록과 합쳐 최근 업데이트 순으로 정렬해 보여준다.
 export const EXTERNAL_APPS: AppSummary[] = [
   {
-    name: "AI 토론",
-    description: "AI와 주제를 정해 찬반 토론을 주고받으며 논리적 말하기를 연습하는 토론 학습 앱",
+    name: "AI 토론 배틀",
+    description:
+      "세종대왕·셜록 홈즈·피노키오 등 AI 인물과 3라운드 토론하며 주장·근거·반론·태도를 실시간 채점받는 토론 연습 앱",
     homepage: "https://aitoron.ai.studio",
     updatedAt: "2026-11-05T00:00:00Z",
     createdAt: "2026-11-05T00:00:00Z",

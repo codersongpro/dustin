@@ -36,7 +36,7 @@ const CATEGORY_BY_NAME: Record<string, string> = {
   CutCap: "생활 도구",
   신통픽: "업무 자동화",
   "핫딜 레이더": "생활 도구",
-  "AI 토론": "학습 도구",
+  "AI 토론 배틀": "학습 도구",
 };
 const DEFAULT_CATEGORY = "웹 앱";
 
