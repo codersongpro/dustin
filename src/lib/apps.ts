@@ -120,6 +120,24 @@ const CURATED_METADATA: Record<
   },
 };
 
+// GitHub 저장소 없이 외부 플랫폼(Google AI Studio 등)에 배포된 앱.
+// GitHub 목록과 합쳐 최근 업데이트 순으로 정렬해 보여준다.
+export const EXTERNAL_APPS: AppSummary[] = [
+  {
+    name: "AI 토론",
+    description: "AI와 주제를 정해 찬반 토론을 주고받으며 논리적 말하기를 연습하는 토론 학습 앱",
+    homepage: "https://aitoron.ai.studio",
+    updatedAt: "2026-11-05T00:00:00Z",
+    createdAt: "2026-11-05T00:00:00Z",
+  },
+];
+
+export function mergeExternalApps(apps: AppSummary[]): AppSummary[] {
+  return [...apps, ...EXTERNAL_APPS.filter((app) => isPublicWebUrl(app.homepage))].sort((a, b) =>
+    b.updatedAt.localeCompare(a.updatedAt),
+  );
+}
+
 export function formatDate(updatedAt: string): string {
   return updatedAt.slice(0, 10).replaceAll("-", ".");
 }
@@ -178,5 +196,5 @@ export async function getApps(): Promise<AppSummary[]> {
   }
 
   const repositories = (await response.json()) as GithubRepository[];
-  return normalizeApps(repositories);
+  return mergeExternalApps(normalizeApps(repositories));
 }

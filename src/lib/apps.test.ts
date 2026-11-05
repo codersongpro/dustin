@@ -1,6 +1,13 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { formatDate, getApps, normalizeApps, type GithubRepository } from "@/lib/apps";
+import {
+  EXTERNAL_APPS,
+  formatDate,
+  getApps,
+  mergeExternalApps,
+  normalizeApps,
+  type GithubRepository,
+} from "@/lib/apps";
 
 const baseRepository: GithubRepository = {
   name: "sample-app",
@@ -144,6 +151,22 @@ describe("formatDate", () => {
   });
 });
 
+describe("mergeExternalApps", () => {
+  it("adds externally hosted apps and keeps newest-first order", () => {
+    const old = {
+      name: "old",
+      description: "d",
+      homepage: "https://old.vercel.app",
+      updatedAt: "2020-01-01T00:00:00Z",
+      createdAt: "2020-01-01T00:00:00Z",
+    };
+    const merged = mergeExternalApps([old]);
+
+    expect(merged.at(-1)).toEqual(old);
+    expect(merged.map((app) => app.name)).toContain("AI 토론");
+  });
+});
+
 describe("getApps", () => {
   it("requests the public owner feed and returns normalized apps", async () => {
     const fetchMock = vi.fn().mockResolvedValue(
@@ -154,7 +177,9 @@ describe("getApps", () => {
     );
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(getApps()).resolves.toHaveLength(1);
+    const apps = await getApps();
+    expect(apps).toHaveLength(1 + EXTERNAL_APPS.length);
+    expect(apps.map((app) => app.homepage)).toContain("https://aitoron.ai.studio");
     expect(fetchMock).toHaveBeenCalledWith(
       "https://api.github.com/users/codersongpro/repos?type=owner&sort=updated&per_page=100",
       {
